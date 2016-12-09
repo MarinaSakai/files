@@ -15,7 +15,7 @@ int accuracy_check(int argc, char** argv){
 	char *fnamein = argv[1];
 	char *fnameout =  argv[2];
 	char c;
-	int i, sum=0, wrong=0;
+	int i, sum=0, correct=0;
 	double accuracy;
 	char in[500000], out[500000];
 
@@ -33,12 +33,12 @@ int accuracy_check(int argc, char** argv){
 
 	for(i=0; i<500000; i++){
 		sum++;
-		if(in[i]!=out[i]){
-			wrong++;
+		if(in[i]==out[i]){
+			correct++;
 		}
 	}
 
-	accuracy = (double)wrong/sum;
+	accuracy = (double)correct/sum;
 
 	printf("accuracy is = %lf\n", accuracy);
 
