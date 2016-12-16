@@ -4,7 +4,9 @@
 #include <sys/resource.h>
 
 int main_prg(int, char**);
-void fill_a(char* ans);
+void fill_a(char*);
+void match_key(char*, char*);
+void control_match_key(char*, char**);
 
 
 int main(int argc, char** argv){
@@ -58,4 +60,41 @@ void fill_a(char* ans){
             ans[i]='a';
         }
     }
+}
+
+//noribenとkeyあげたらnoribenのうちkeyが該当できる場所を全て書き換えていく
+void match_key(char* noriben, char* key){
+	
+	int key_len = strlen(key);
+	int head,i,k;
+	
+	for(head=0; head<500000-key_len; head++){
+
+		//checking if key matches
+		for(i=0; i<key_len; i++){
+			if((key[i]!=noriben[head+i]) && (noriben[head+i]!='x')){
+				break;
+			}
+			if(i==key_len-1){//key match -> fill noriben
+				for(k=0; k<key_len; k++){
+					if(noriben[head+k]=='x'){
+						noriben[head+k]=key[k];
+					}
+				}
+			}
+		}
+		//
+		
+	}
+}
+
+void control_match_key(char* noriben, char** key){
+
+	int i;
+	///////////////////!!!!!!!!
+	//ここのiの上限を変えると精度調整になる
+	for(i=0; i<15; i++){
+		match_key(noriben, key[i]);
+	}
+
 }
